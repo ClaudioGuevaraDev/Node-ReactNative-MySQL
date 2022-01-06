@@ -1,0 +1,25 @@
+@api = http://localhost:4000/api/tasks
+
+###
+POST {{api}}
+Content-Type: application/json
+
+{
+    "name": "Tengo que limpiar la casa",
+    "completed": true,
+    "userId": 1
+}
+###
+GET {{api}}
+###
+GET {{api}}/1
+###
+DELETE {{api}}/3
+###
+PUT {{api}}/4
+Content-Type: application/json
+
+{
+    "name": "Tengo que cocinar xd",
+    "completed": false
+}

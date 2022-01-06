@@ -1,0 +1,5 @@
+@api = http://192.168.1.8:4000/api/users
+
+###
+GET {{api}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJjaGljaGEiLCJpYXQiOjE2NDEzOTgyNDQsImV4cCI6MTY0MTQ4NDY0NH0.u6HG0FZNwiwGo2ueCDoPxw8wk6OefiGwORqdxZ0_r_Ea
