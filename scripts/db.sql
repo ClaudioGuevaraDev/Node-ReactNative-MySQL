@@ -1,0 +1,21 @@
+CREATE DATABASE IF NOT EXISTS node_reactnative_bootstrap;
+
+USE node_reactnative_bootstrap;
+
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS tasks (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    completed TINYINT NOT NULL,
+    createdAt TIMESTAMP NOT NULL,
+    updatedAt TIMESTAMP NOT NULL,
+    userId INTEGER REFERENCES users (id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
