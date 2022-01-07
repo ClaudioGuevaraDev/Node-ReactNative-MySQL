@@ -1,48 +1,17 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { ToastProvider } from 'react-native-toast-notifications'
+import { useReducer } from 'react'
 
-// Screens
-import LoginScreen from './screens/LoginScreen'
-import RegisterScreen from './screens/RegisterScreen'
-import HomeScreen from './screens/HomeScreen'
-import TaskFormScreen from './screens/TaskFormScreen'
+import AppContext, { initialState } from './context/AppContext'
+import AppReducer from './context/AppReducer'
 
-const Stack = createNativeStackNavigator()
+import Router from './Router'
 
 const App = () => {
-    
+    const [state, dispatch] = useReducer(AppReducer, initialState)
+
     return (
-        <NavigationContainer>
-            <ToastProvider>
-                <Stack.Navigator>
-                    <Stack.Screen 
-                        name="Login" 
-                        component={LoginScreen}
-                        options={{
-                            headerTitle: 'INICIO DE SESIÓN',
-                            headerTintColor: '#4D7EA8'
-                        }}
-                    />
-                    <Stack.Screen
-                        name="Register"
-                        component={RegisterScreen}
-                        options={{
-                            headerTintColor: '#4D7EA8',
-                            headerTitle: 'REGISTRO'
-                        }}
-                    />
-                    <Stack.Screen
-                        name="Home"
-                        component={HomeScreen}
-                    />
-                    <Stack.Screen
-                        name="TaskForm"
-                        component={TaskFormScreen}
-                    />
-                </Stack.Navigator>
-            </ToastProvider>
-        </NavigationContainer>
+        <AppContext.Provider value={{ state, dispatch }}>
+            <Router/>
+        </AppContext.Provider>
     )
 }
 

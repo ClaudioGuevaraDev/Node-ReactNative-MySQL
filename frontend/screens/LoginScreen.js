@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import jwt_decode from 'jwt-decode'
 
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import {
     StyleSheet,
     Text,
@@ -14,9 +15,14 @@ import {
 } from 'react-native-elements'
 import { useToast } from 'react-native-toast-notifications'
 
+import AppContext from '../context/AppContext'
+
 import Layout from './Layout'
 
 import { signIn } from '../services/auth'
+import {
+    LOGGED_USER
+} from '../context/AppConstants'
 
 const LoginScreen = ({ navigation }) => {
     const toast = useToast()
@@ -24,12 +30,23 @@ const LoginScreen = ({ navigation }) => {
     const [user, setUser] = useState({ email: '', password: '' })
     const [loading, setLoading] = useState(false)
 
+    const { dispatch } = useContext(AppContext)
+
     const handleSubmit = async () => {
         setLoading(true)
         try {
             const token = await signIn(user)
             await AsyncStorage.setItem('token', JSON.stringify(token))
-            navigation.navigate('Home')
+            const { username } = jwt_decode(token)
+            
+            dispatch({
+                type: LOGGED_USER,
+                payload: {
+                    logged: true,
+                    token: token,
+                    username: username
+                }
+            })
         } catch (error) {
             toast.show(error.response.data.message, {
                 type: 'danger',
