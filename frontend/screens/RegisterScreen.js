@@ -32,6 +32,8 @@ const RegisterScreen = ({ navigation }) => {
                 placement: 'bottom',
                 animationType: 'zoom-in'
             })
+            setUser({ username: '', email: '', password: '' })
+            setLoading(false)
             navigation.navigate('Login')
         } catch (error) {
             toast.show(error.response.data.message, {
@@ -40,9 +42,9 @@ const RegisterScreen = ({ navigation }) => {
                 placement: 'bottom',
                 animationType: 'zoom-in'
             })
+            setUser({ username: '', email: '', password: '' })
+            setLoading(false)
         }
-        setUser({ username: '', email: '', password: '' })
-        setLoading(false)
     }
 
     return (

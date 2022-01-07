@@ -32,6 +32,11 @@ const LoginScreen = ({ navigation }) => {
 
     const { dispatch } = useContext(AppContext)
 
+    const reset = async () => {
+        setUser({ email: '', password: '' })
+        setLoading(false)
+    }
+
     const handleSubmit = async () => {
         setLoading(true)
         try {
@@ -39,6 +44,8 @@ const LoginScreen = ({ navigation }) => {
             await AsyncStorage.setItem('token', JSON.stringify(token))
             const { username } = jwt_decode(token)
             
+            reset()
+
             dispatch({
                 type: LOGGED_USER,
                 payload: {
@@ -54,9 +61,8 @@ const LoginScreen = ({ navigation }) => {
                 placement: 'bottom',
                 animationType: 'zoom-in'
             })
+            reset()
         }
-        setUser({ email: '', password: '' })
-        setLoading(false)
     }
 
     return (
