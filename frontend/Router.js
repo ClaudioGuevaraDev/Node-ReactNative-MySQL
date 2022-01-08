@@ -34,13 +34,14 @@ const Router = () => {
         const token = await AsyncStorage.getItem('token')
 
         if (token) {
-            const { username } = jwt_decode(token)
+            const { id, username } = jwt_decode(token)
 
             dispatch({
                 type: LOGGED_USER,
                 payload: {
                     logged: true,
                     token: token,
+                    userId: id,
                     username: username
                 }
             })
@@ -78,7 +79,7 @@ const Router = () => {
                             name="Home"
                             component={HomeScreen}
                             options={({navigation}) => ({
-                                headerTitle: 'HOME',
+                                headerTitle: 'Inicio',
                                 headerTintColor: '#4D7EA8',
                                 headerRight: () => (
                                     <Button
@@ -101,7 +102,7 @@ const Router = () => {
                             name="Login" 
                             component={LoginScreen}
                             options={{
-                                headerTitle: 'INICIO DE SESIÓN',
+                                headerTitle: 'Login',
                                 headerTintColor: '#4D7EA8'
                             }}
                         />
@@ -111,12 +112,16 @@ const Router = () => {
                         component={RegisterScreen}
                         options={{
                             headerTintColor: '#4D7EA8',
-                            headerTitle: 'REGISTRO'
+                            headerTitle: 'Registro'
                         }}
                     />
                     <Stack.Screen
                         name="TaskForm"
                         component={TaskFormScreen}
+                        options={{
+                            headerTitle: 'Crear Tareas',
+                            headerTintColor: '#4D7EA8'
+                        }}
                     />
                     </Stack.Navigator>
                 </NavigationContainer>

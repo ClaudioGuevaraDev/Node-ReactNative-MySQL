@@ -1,4 +1,4 @@
-@api = http://localhost:4000/api/auth
+@api = http://192.168.1.4:4000/api/auth
 
 ###
 POST {{api}}/sign-up
@@ -14,6 +14,6 @@ POST {{api}}/sign-in
 Content-Type: application/json
 
 {
-    "email": "chicha@gmail.com",
-    "password": "123"
+    "email": "chichadioss23@gmail.com",
+    "password": "claudio123"
 }

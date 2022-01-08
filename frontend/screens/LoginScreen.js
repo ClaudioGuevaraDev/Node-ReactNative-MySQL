@@ -41,8 +41,8 @@ const LoginScreen = ({ navigation }) => {
         setLoading(true)
         try {
             const token = await signIn(user)
-            await AsyncStorage.setItem('token', JSON.stringify(token))
-            const { username } = jwt_decode(token)
+            await AsyncStorage.setItem('token', token)
+            const { id, username } = jwt_decode(token)
             
             reset()
 
@@ -51,6 +51,7 @@ const LoginScreen = ({ navigation }) => {
                 payload: {
                     logged: true,
                     token: token,
+                    userId: id,
                     username: username
                 }
             })

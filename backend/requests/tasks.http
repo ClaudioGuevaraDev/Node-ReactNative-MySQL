@@ -1,8 +1,10 @@
-@api = http://localhost:4000/api/tasks
+@api = http://192.168.1.4:4000/api/tasks
 
 ###
 POST {{api}}
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJDbGF1ZGlvIiwiaWF0IjoxNjQxNjU1MzU0LCJleHAiOjE2NDE3NDE3NTR9.hJnOIJAg09GFcEGZR1PgqlQyE1GT9mDKzFR5TFX-ekY
+
 
 {
     "name": "Tengo que limpiar la casa",
