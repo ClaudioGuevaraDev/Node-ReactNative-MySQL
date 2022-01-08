@@ -16,6 +16,7 @@ const TaskList = () => {
     const [tasks, setTasks] = useState([])
     const [loading, setLoading] = useState(true)
     const [refreshing, setRefreshing] = useState(false)
+    const [refresh, setRefresh] = useState(true)
     const { state } = useContext(AppContext)
     const toast = useToast()
     const isFocused = useIsFocused()
@@ -47,10 +48,10 @@ const TaskList = () => {
 
     useEffect(() => {
         getTasks()
-    }, [isFocused])
+    }, [isFocused, refresh])
 
     const renderItem = ({ item }) => (
-        <TaskItem task={item}/>
+        <TaskItem task={item} refresh={refresh} setRefresh={setRefresh}/>
     )
 
     return (

@@ -19,3 +19,11 @@ export const getAllTasks = async (userId, token) => {
 
     return data
 }
+
+export const updateTask = async (data, taskId, token) => {
+    return await axios.put(`${baseURL}/${taskId}`, data, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

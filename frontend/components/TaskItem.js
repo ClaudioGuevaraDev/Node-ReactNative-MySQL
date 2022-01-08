@@ -1,7 +1,27 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 
-const TaskItem = ({ task }) => {
+import {
+    updateTask
+} from '../services/tasks'
+
+const TaskItem = ({ task, refresh, setRefresh }) => {
+
+    const handleCompleted = async () => {
+        const token = await AsyncStorage.getItem('token')
+
+        const data = {
+            name: task.name,
+            completed: !task.completed
+        }
+        try {
+            await updateTask(data, task.id, token)
+            setRefresh(!refresh)
+        } catch (error) {
+
+        }
+    }
 
     return (
         <View style={styles.container}>
@@ -17,6 +37,7 @@ const TaskItem = ({ task }) => {
                         backgroundColor: task.completed ? 'rgba(127, 220, 103, 1)' : 'rgba(255, 193, 7, 1)',
                         padding: 4
                     }}
+                    onPress={handleCompleted}
                 />
                 <Button
                     style={styles.button}
