@@ -9,3 +9,13 @@ export const createTask = async (data, token) => {
         }
     })
 }
+
+export const getAllTasks = async (userId, token) => {
+    const { data } = await axios.post(`${baseURL}/get-all`, { userId: userId }, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+
+    return data
+}

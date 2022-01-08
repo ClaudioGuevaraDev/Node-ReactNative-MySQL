@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import AppContext from '../context/AppContext'
 
 import Layout from './Layout'
+import TaskList from '../components/TaskList'
 
 const HomeScreen = () => {
     const navigation = useNavigation()
@@ -30,6 +31,7 @@ const HomeScreen = () => {
                     onPress={() => navigation.navigate('TaskForm')}
                 />
             </View>
+            <TaskList/>
         </Layout>
     )
 }

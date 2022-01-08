@@ -19,10 +19,13 @@ export const createTask = async (req, res) => {
 }
 
 export const getAllTasks = async (req, res) => {
+    const { userId } = req.body
+
     const db = await connection()
 
     const [rows] = await db.query(
-        'SELECT * FROM tasks'
+        'SELECT * FROM tasks WHERE userId = ?',
+        [userId]
     )
 
     res.json(rows)

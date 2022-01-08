@@ -8,7 +8,7 @@ const router = Router()
 router.post('/', [
     middlewares.validateToken
 ], tasksCtrl.createTask)
-router.get('/', [
+router.post('/get-all', [
     middlewares.validateToken
 ], tasksCtrl.getAllTasks)
 router.get('/:id', [
