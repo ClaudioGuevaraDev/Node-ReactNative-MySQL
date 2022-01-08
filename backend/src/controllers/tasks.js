@@ -35,7 +35,7 @@ export const getOneTask = async (req, res) => {
     const db = await connection()
 
     const [rows] = await db.query(
-        'SELECT * FROM users WHERE id = ?',
+        'SELECT * FROM tasks WHERE id = ?',
         [req.params.id]
     )
 

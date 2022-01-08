@@ -1,7 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Button } from 'react-native-elements'
 import { useToast } from 'react-native-toast-notifications'
+import { useNavigation } from '@react-navigation/native'
 
 import {
     updateTask,
@@ -10,6 +11,7 @@ import {
 
 const TaskItem = ({ task, refresh, setRefresh }) => {
     const toast = useToast()
+    const navigation = useNavigation()
 
     const handleCompleted = async () => {
         const token = await AsyncStorage.getItem('token')
@@ -55,7 +57,9 @@ const TaskItem = ({ task, refresh, setRefresh }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>{task.name}</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('TaskForm', { id: task.id })}>
+                <Text style={styles.text}>{task.name}</Text>
+            </TouchableOpacity>
             <View>
                 <Button
                     style={styles.button}

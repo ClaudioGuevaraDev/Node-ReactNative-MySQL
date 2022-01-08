@@ -119,7 +119,7 @@ const Router = () => {
                         name="TaskForm"
                         component={TaskFormScreen}
                         options={{
-                            headerTitle: 'Crear Tareas',
+                            headerTitle: '',
                             headerTintColor: '#4D7EA8'
                         }}
                     />
