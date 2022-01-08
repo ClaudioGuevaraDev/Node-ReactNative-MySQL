@@ -27,3 +27,11 @@ export const updateTask = async (data, taskId, token) => {
         }
     })
 }
+
+export const deleteTask = async (taskId, token) => {
+    return await axios.delete(`${baseURL}/${taskId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+}

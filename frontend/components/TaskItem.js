@@ -1,12 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
+import { useToast } from 'react-native-toast-notifications'
 
 import {
-    updateTask
+    updateTask,
+    deleteTask
 } from '../services/tasks'
 
 const TaskItem = ({ task, refresh, setRefresh }) => {
+    const toast = useToast()
 
     const handleCompleted = async () => {
         const token = await AsyncStorage.getItem('token')
@@ -19,7 +22,34 @@ const TaskItem = ({ task, refresh, setRefresh }) => {
             await updateTask(data, task.id, token)
             setRefresh(!refresh)
         } catch (error) {
+            toast.show('Error al actualizar la tarea.', {
+                type: 'danger',
+                duration: 5000,
+                placement: 'bottom',
+                animationType: 'zoom-in'
+            })
+        }
+    }
 
+    const handleDelete = async () => {
+        const token = await AsyncStorage.getItem('token')
+
+        try {
+            await deleteTask(task.id, token)
+            setRefresh(!refresh)
+            toast.show('Tarea eliminada con éxito.', {
+                type: 'success',
+                duration: 5000,
+                placement: 'bottom',
+                animationType: 'zoom-in'
+            })
+        } catch (error) {
+            toast.show('Error al eliminar la tarea.', {
+                type: 'danger',
+                duration: 5000,
+                placement: 'bottom',
+                animationType: 'zoom-in'
+            })
         }
     }
 
@@ -49,6 +79,7 @@ const TaskItem = ({ task, refresh, setRefresh }) => {
                         backgroundColor: 'rgba(214, 61, 57, 1)',
                         padding: 4
                     }}
+                    onPress={handleDelete}
                 />
             </View>
         </View>
