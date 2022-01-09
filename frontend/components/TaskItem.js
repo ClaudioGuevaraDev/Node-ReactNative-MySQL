@@ -57,9 +57,11 @@ const TaskItem = ({ task, refresh, setRefresh }) => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.navigate('TaskForm', { id: task.id })}>
-                <Text style={styles.text}>{task.name}</Text>
-            </TouchableOpacity>
+            <View style={{ maxWidth: '70%' }}>
+                <TouchableOpacity onPress={() => navigation.navigate('TaskForm', { id: task.id })}>
+                    <Text style={styles.text}>{task.name}</Text>
+                </TouchableOpacity>
+            </View>
             <View>
                 <Button
                     style={styles.button}
